@@ -1,13 +1,30 @@
-// ページの読み込みを待つ
-window.addEventListener('load', init);
+let width = window.innerWidth;
+let height = window.innerHeight;
+let renderer;
+let scene;
+
+let mercury;
+let venus;
+let earth;
+let mars;
+let jupiter;
+let saturn;
+let uranus;
+let neptune;
+let pluto;
+
+let camera;
+let pointLight;
+let ambientLight;
+
+// window.addEventListener('load', init);
+init();
+animate();
 
 function init() {
-  // サイズを指定
-  const width = window.innerWidth;
-  const height = window.innerHeight;
 
   // レンダラーを作成
-  const renderer = new THREE.WebGLRenderer({
+  renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector('#myCanvas')
   });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -15,30 +32,29 @@ function init() {
   renderer.setClearColor(0x707070);
 
   // シーンを作成
-  const scene = new THREE.Scene();
+  scene = new THREE.Scene();
 
   // カメラを作成
-  const camera = new THREE.PerspectiveCamera(45, width / height);
-  camera.position.set(0, 0, 100);
+  camera = new THREE.PerspectiveCamera(45, width / height);
+  camera.position.set(0, 0, 50);
   // camera.position.set(0, 0, 600);
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
   
-
   // 点光源を作成
   // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
-  const light = new THREE.PointLight(0xffffff, 1, 50, 1);
-  scene.add(light);
-  light.position.set(0, 0, 0);
+  pointLlight = new THREE.PointLight(0xffffff, 1, 50, 1);
+  scene.add(pointLlight);
+  pointLlight.position.set(0, 0, 0);
 
   //環境光源
-  const ambient = new THREE.AmbientLight(0x222222);
-  scene.add(ambient);
+  ambientLight = new THREE.AmbientLight(0xcccccc);
+  scene.add(ambientLight);
   // const testlight = new THREE.AmbientLight(0xFFFFFF, 1.0);
   // scene.add(testlight);
 
   // 照明を可視化するヘルパー
-  const lightHelper = new THREE.PointLightHelper(light);
+  const lightHelper = new THREE.PointLightHelper(pointLlight);
   scene.add(lightHelper);
 
   // tick();
@@ -58,94 +74,178 @@ function init() {
   // }
 
   // ------------------------------Mercury
-  
-  // オブジェクトを作成
-  const mercury = new THREE.Mesh(
-    new THREE.SphereGeometry(.4, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  mercury.position.set(6, 0, 0);
-  scene.add(mercury);
-
-  // ------------------------------Venus
-
-  const venus = new THREE.Mesh(
-    new THREE.SphereGeometry(1.2, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  venus.position.set(11, 0, 0);
-  scene.add(venus);
-
-  // ------------------------------Earth
-
-  const earth = new THREE.Mesh(
-    new THREE.SphereGeometry(1.2, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  earth.position.set(15, 0, 0);
-  scene.add(earth);
-
-  const loader = new THREE.TextureLoader();
-  loader.load("../images/earth.jpg", function(texture) {
-    createEarth(texture);
+  loader = new THREE.TextureLoader();
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/mercury.jpg', function(mercuryTextuer) {
+    createMercury(mercuryTextuer);
     render();
   });
 
-  // ------------------------------Mars
+  function createMercury(mercuryTextuer){
+    mercury = new THREE.Mesh(
+      new THREE.SphereGeometry(.4, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: mercuryTextuer
+      })
+    );
+    mercury.position.set(6, 0, 0);
+    scene.add(mercury);
+  }
 
-  const mars = new THREE.Mesh(
-    new THREE.SphereGeometry(.6, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  mars.position.set(23, 0, 0);
-  scene.add(mars);
+  // ------------------------------Venus
+  loader = new THREE.TextureLoader();
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/venus.jpg', function(venusTextuer) {
+    createVenus(venusTextuer);
+    render();
+  });
+
+  function createVenus(venusTextuer){
+    venus = new THREE.Mesh(
+      new THREE.SphereGeometry(1.2, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: venusTextuer
+      })
+    );
+    venus.position.set(11, 0, 0);
+    scene.add(venus);
+  }
+
+  // ------------------------------Earth
+  loader = new THREE.TextureLoader();
+  // https://masadesu.net/space/images/earth.png
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/earth.png', function(earthTextuer) {
+    createEarth(earthTextuer);
+    render();
+  });
+
+  function createEarth(earthTextuer){
+    earth = new THREE.Mesh(
+      new THREE.SphereGeometry(1.2, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: earthTextuer
+      })
+    );
+    earth.position.set(15, 0, 0);
+    scene.add(earth);
+  }
+
+  // ------------------------------Mars
+  loader = new THREE.TextureLoader();
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/mars.jpg', function(marsTextuer) {
+    createMars(marsTextuer);
+    render();
+  });
+
+  function createMars(marsTextuer){
+    mars = new THREE.Mesh(
+      new THREE.SphereGeometry(0.6, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: marsTextuer
+      })
+    );
+    mars.position.set(23, 0, 0);
+    scene.add(mars);
+  }
   
   // ------------------------------Jupiter
+  loader = new THREE.TextureLoader();
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/jupiter.jpg', function(jupiterTextuer) {
+    createJupiter(jupiterTextuer);
+    render();
+  });
 
-  const jupiter = new THREE.Mesh(
-    new THREE.SphereGeometry(14, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  jupiter.position.set(78, 0, 0);
-  scene.add(jupiter);
+  function createJupiter(jupiterTextuer){
+    jupiter = new THREE.Mesh(
+      new THREE.SphereGeometry(14, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: jupiterTextuer
+      })
+    );
+    jupiter.position.set(78, 0, 0);
+    scene.add(jupiter);
+  }
   
   // ------------------------------Saturn
+  loader = new THREE.TextureLoader();
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/saturn.jpg', function(saturnTextuer) {
+    createSaturn(saturnTextuer);
+    render();
+  });
 
-  const saturn = new THREE.Mesh(
-    new THREE.SphereGeometry(11, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  saturn.position.set(143, 0, 0);
-  scene.add(saturn);
+  function createSaturn(saturnTextuer){
+    saturn = new THREE.Mesh(
+      new THREE.SphereGeometry(11, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: saturnTextuer
+      })
+    );
+    saturn.position.set(143, 0, 0);
+    scene.add(saturn);
+  }
   
   // ------------------------------Uranus
+  loader = new THREE.TextureLoader();
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/ouranos.jpg', function(uranusTextuer) {
+    createUranus(uranusTextuer);
+    render();
+  });
 
-  const uranus = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  uranus.position.set(288, 0, 0);
-  scene.add(uranus);
+  function createUranus(uranusTextuer){
+    uranus = new THREE.Mesh(
+      new THREE.SphereGeometry(5, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: uranusTextuer
+      })
+    );
+    uranus.position.set(288, 0, 0);
+    scene.add(uranus);
+  }
   
   // ------------------------------Neptune
+  loader = new THREE.TextureLoader();
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/neptune.jpg', function(neptuneTextuer) {
+    createNeptune(neptuneTextuer);
+    render();
+  });
 
-  const neptune = new THREE.Mesh(
-    new THREE.SphereGeometry(5, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  neptune.position.set(450, 0, 0);
-  scene.add(neptune);
+  function createNeptune(neptuneTextuer){
+    neptune = new THREE.Mesh(
+      new THREE.SphereGeometry(5, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: neptuneTextuer
+      })
+    );
+    neptune.position.set(450, 0, 0);
+    scene.add(neptune);
+  }
   
   // ------------------------------Pluto
+  loader = new THREE.TextureLoader();
+  loader.load('https://raw.githubusercontent.com/82mou/sandbox/master/universe/img/pluto.jpg', function(plutoTextuer) {
+    createPluto(plutoTextuer);
+    render();
+  });
 
-  const pluto = new THREE.Mesh(
-    new THREE.SphereGeometry(.2, 32, 32),
-    new THREE.MeshStandardMaterial({color: 0xccccff})
-  );
-  pluto.position.set(590, 0, 0);
-  scene.add(pluto);
+  function createPluto(plutoTextuer){
+    pluto = new THREE.Mesh(
+      new THREE.SphereGeometry(.2, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: plutoTextuer
+      })
+    );
+    pluto.position.set(590, 0, 0);
+    scene.add(pluto);
+  }
   
   // ------------------------------
   // ------------------------------
+}
+
+function animate(){
+  requestAnimationFrame( animate );
+  render();
+}
+
+function render(){
+  earth.rotation.y += 0.01;
   renderer.render(scene, camera);
 }
