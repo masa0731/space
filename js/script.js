@@ -17,7 +17,9 @@ let camera;
 let pointLight;
 let ambientLight;
 
-// window.addEventListener('load', init);
+let x = 0;
+let z = 50;
+
 init();
 animate();
 
@@ -36,7 +38,7 @@ function init() {
 
   // カメラを作成
   camera = new THREE.PerspectiveCamera(45, width / height);
-  camera.position.set(0, 0, 50);
+  camera.position.set(x, 0, z);
   // camera.position.set(0, 0, 600);
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
@@ -246,6 +248,50 @@ function animate(){
 }
 
 function render(){
-  earth.rotation.y += 0.01;
+  // requestAnimationFrame(() => { this.render(); });
+
+  // ------------------------------自転
+  // mercury.rotation.y += THREE.Math.degToRad(0.5);
+  // venus.rotation.y -= THREE.Math.degToRad(0.01);
+  // earth.rotation.y += THREE.Math.degToRad(1);
+  // mars.rotation.y += THREE.Math.degToRad(1);
+  // jupiter.rotation.y += THREE.Math.degToRad(2);
+  // saturn.rotation.y -= THREE.Math.degToRad(2);
+  // uranus.rotation.x += THREE.Math.degToRad(1.5);
+  // neptune.rotation.y += THREE.Math.degToRad(1.5);
+  // pluto.rotation.y += THREE.Math.degToRad(0);
+
   renderer.render(scene, camera);
+}
+
+// ------------------------------移動
+document.addEventListener("keydown", keydown);
+
+function keydown(event){
+  if(event.keyCode === 37){// 左
+    moveLeft();
+  }else if(event.keyCode === 39){// 右
+    moveRight();
+  }else if(event.keyCode === 38){// 上
+    moveFront();
+  }else if(event.keyCode === 40){// 下
+    moveBack();
+  }
+}
+
+function moveLeft(){
+  x -= 3;
+  camera.position.set(x, 0, z);
+}
+function moveRight(){
+  x += 3;
+  camera.position.set(x, 0, z);
+}
+function moveFront(){
+  z -= 3;
+  camera.position.set(x, 0, z);
+}
+function moveBack(){
+  z += 3;
+  camera.position.set(x, 0, z);
 }
