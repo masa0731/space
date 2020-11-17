@@ -259,7 +259,7 @@ function init() {
   // ------------------------------
 
   loader = new THREE.TextureLoader();
-  loader.load('star.png', function(starTextuer) {
+  loader.load('images/star.png', function(starTextuer) {
     createStar(starTextuer);
     render();
   });
