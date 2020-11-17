@@ -15,18 +15,15 @@ let pluto;
 
 let camera;
 let controls;
-// let pointLight;
 let ambientLight;
 
-let x = 0;
-let z = 50;
 
 init();
 animate();
 
 function init() {
 
-  // レンダラーを作成
+  // レンダラー
   renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector('#myCanvas')
   });
@@ -34,17 +31,17 @@ function init() {
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000);
 
-  // シーンを作成
+  // シーン
   scene = new THREE.Scene();
 
-  // カメラを作成
+  // カメラ
   camera = new THREE.PerspectiveCamera(45, width / height);
-  camera.position.set(0, 0, 250);
+  camera.position.set(0, 0, 200);
   // camera.position.set(0, 0, 600);
   // controls = new THREE.OrbitControls(camera);
 
   
-  // 点光源を作成
+  // 点光源
   // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
   // pointLlight = new THREE.PointLight(0xffffff, 1, 50, 1);
   // scene.add(pointLlight);
@@ -60,21 +57,7 @@ function init() {
   // const testlight = new THREE.AmbientLight(0xFFFFFF, 1.0);
   // scene.add(testlight);
 
-  // tick();
-
-  // 毎フレーム時に実行されるループイベントです
-  // function tick() {
-
-  //   照明の位置を更新
-  //   const t = Date.now() / 500;
-  //   const r = 10.0;
-  //   const lx = r * Math.cos(t);
-  //   const lz = r * Math.sin(t);
-  //   const ly = 6.0 + 5.0 * Math.sin(t / 3.0);
-  //   light.lookAt(new THREE.Vector3(0, 0, 0));
-
-  //   requestAnimationFrame(tick);
-  // }
+  
 
   // ------------------------------Sun
   loader = new THREE.TextureLoader();
@@ -263,30 +246,29 @@ function init() {
     createStar(starTextuer);
     render();
   });
+  
 
   function createStar(starTextuer){
-    const geometry = new THREE.Geometry();
+    let star = new THREE.Geometry();
 
-  for (let i = 0; i < 50000; i++) {
-    geometry.vertices.push(new THREE.Vector3(
-      3000 * (Math.random() - 0.5),
-      3000 * (Math.random() - 0.5),
-      3000 * (Math.random() - 0.5),
-    ));
+    for (let i = 0; i < 50000; i++) {
+      star.vertices.push(new THREE.Vector3(
+        3000 * (Math.random() - 0.5),
+        3000 * (Math.random() - 0.5),
+        3000 * (Math.random() - 0.5),
+      ));
+    }
+
+    // マテリアル
+    const material = new THREE.PointsMaterial({
+      map: starTextuer,
+      size: 2,
+      color: 0xFFFFFF,
+    });
+    
+    const mesh = new THREE.Points(star, material);
+    scene.add(mesh);
   }
-
-  // マテリアルを作成
-  const material = new THREE.PointsMaterial({
-    map: starTextuer,
-    size: 2,
-    color: 0xFFFFFF,
-  });
-  
-  const mesh = new THREE.Points(geometry, material);
-  scene.add(mesh);
-  }
-
-  
 
   // ------------------------------
 
@@ -299,19 +281,102 @@ function animate(){
 }
 
 function render(){
-  // requestAnimationFrame(() => { this.render(); });
 
   // ------------------------------自転
+
   sun.rotation.y += THREE.Math.degToRad(0.2);
   mercury.rotation.y += THREE.Math.degToRad(0.5);
   venus.rotation.y -= THREE.Math.degToRad(0.01);
-  earth.rotation.y += THREE.Math.degToRad(1);
+  earth.rotation.y += THREE.Math.degToRad(5);
   mars.rotation.y += THREE.Math.degToRad(1);
   jupiter.rotation.y += THREE.Math.degToRad(2);
   saturn.rotation.y -= THREE.Math.degToRad(2);
   uranus.rotation.x += THREE.Math.degToRad(1.5);
   neptune.rotation.y += THREE.Math.degToRad(1.5);
   pluto.rotation.y += THREE.Math.degToRad(0);
+
+  // ------------------------------公転
+
+  // ------------------------------Mercury
+
+  const mercuryT = Date.now() / 880;
+  const mercuryR = 19;
+  const mercurylX = mercuryR * Math.cos(mercuryT);
+  const mercurylZ = mercuryR * Math.sin(mercuryT);
+  const mercurylY = Math.sin(mercuryT / 3.0);
+  mercury.position.set(mercurylX, mercurylY, mercurylZ);
+
+  // ------------------------------Venus
+
+  const venusT = Date.now() / 2250;
+  const venusR = 24;
+  const venuslX = venusR * Math.cos(venusT);
+  const venuslZ = venusR * Math.sin(venusT);
+  const venuslY = Math.sin(venusT / 3.0);
+  venus.position.set(venuslX, venuslY, venuslZ);
+
+  // ------------------------------Earth
+
+  const earthT = Date.now() / 3650;
+  const earthR = 28;
+  const earthlX = earthR * Math.cos(earthT);
+  const earthlZ = earthR * Math.sin(earthT);
+  const earthlY = Math.sin(earthT / 3.0);
+  earth.position.set(earthlX, earthlY, earthlZ);
+
+  // ------------------------------Mars
+
+  const marsT = Date.now() / 6870;
+  const marsR = 36;
+  const marslX = marsR * Math.cos(marsT);
+  const marslZ = marsR * Math.sin(marsT);
+  const marslY = Math.sin(marsT / 3.0);
+  mars.position.set(marslX, marslY, marslZ);
+
+  // ------------------------------Jupiter
+
+  const jupiterT = Date.now() / 43300;
+  const jupiterR = 91;
+  const jupiterlX = jupiterR * Math.cos(jupiterT);
+  const jupiterlZ = jupiterR * Math.sin(jupiterT);
+  const jupiterlY = Math.sin(jupiterT / 3.0);
+  jupiter.position.set(jupiterlX, jupiterlY, jupiterlZ);
+
+   // ------------------------------Saturn
+
+   const saturnT = Date.now() / 107520;
+   const saturnR = 156;
+   const saturnlX = saturnR * Math.cos(saturnT);
+   const saturnlZ = saturnR * Math.sin(saturnT);
+   const saturnlY = Math.sin(saturnT / 3.0);
+   saturn.position.set(saturnlX, saturnlY, saturnlZ);
+
+  // ------------------------------Uranus
+
+  const uranusT = Date.now() / 306670;
+  const uranusR = 301;
+  const uranuslX = uranusR * Math.cos(uranusT);
+  const uranuslZ = uranusR * Math.sin(uranusT);
+  const uranuslY = Math.sin(uranusT / 3.0);
+  uranus.position.set(uranuslX, uranuslY, uranuslZ);
+
+  // ------------------------------Neptune
+
+  const neptuneT = Date.now() / 601410;
+  const neptuneR = 463;
+  const neptunelX = neptuneR * Math.cos(neptuneT);
+  const neptunelZ = neptuneR * Math.sin(neptuneT);
+  const neptunelY = Math.sin(neptuneT / 3.0);
+  neptune.position.set(neptunelX, neptunelY, neptunelZ);
+
+  // ------------------------------Pluto
+
+  const plutoT = Date.now() / 905200;
+  const plutoR = 603;
+  const plutolX = plutoR * Math.cos(plutoT);
+  const plutolZ = plutoR * Math.sin(plutoT);
+  const plutolY = Math.sin(plutoT / 3.0);
+  pluto.position.set(plutolX, plutolY, plutolZ);
 
   // controls.update();
   renderer.render(scene, camera);
