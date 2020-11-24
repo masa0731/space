@@ -14,7 +14,7 @@ let neptune;
 let pluto;
 
 let camera;
-let controls;
+// let controls;
 let ambientLight;
 
 
@@ -37,19 +37,6 @@ function init() {
   // カメラ
   camera = new THREE.PerspectiveCamera(45, width / height);
   camera.position.set(0, 0, 200);
-  // camera.position.set(0, 0, 600);
-  // controls = new THREE.OrbitControls(camera);
-
-  
-  // 点光源
-  // new THREE.PointLight(色, 光の強さ, 距離, 光の減衰率)
-  // pointLlight = new THREE.PointLight(0xffffff, 1, 50, 1);
-  // scene.add(pointLlight);
-  // pointLlight.position.set(0, 0, 0);
-  
- // 照明を可視化するヘルパー
-  // const lightHelper = new THREE.PointLightHelper(pointLlight);
-  // scene.add(lightHelper);
 
   //環境光源
   ambientLight = new THREE.AmbientLight(0xcccccc);
@@ -239,7 +226,7 @@ function init() {
     scene.add(pluto);
   }
   
-  // ------------------------------
+  // ------------------------------Star
 
   loader = new THREE.TextureLoader();
   loader.load('images/star.png', function(starTextuer) {
@@ -277,6 +264,12 @@ function init() {
 
 function animate(){
   requestAnimationFrame( animate );
+
+  let controls = new THREE.OrbitControls(camera,renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = .0001;
+  
+
   render();
 }
 
