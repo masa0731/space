@@ -265,8 +265,11 @@ function animate(){
   requestAnimationFrame( animate );
 
   let controls = new THREE.OrbitControls(camera,renderer.domElement);
+  controls.target.set( 0, 0, 0 );
+  controls.minDistance = 100;
+  controls.maxDistance = 1000;
   controls.enableDamping = true;
-  controls.dampingFactor = .0001;
+  controls.dampingFactor = .001;
   
 
   render();
