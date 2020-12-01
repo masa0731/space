@@ -14,7 +14,6 @@ let neptune;
 let pluto;
 
 let camera;
-// let controls;
 let ambientLight;
 
 
@@ -23,7 +22,7 @@ animate();
 
 function init() {
 
-  // レンダラー
+  //レンダラー
   renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector('#myCanvas')
   });
@@ -31,10 +30,10 @@ function init() {
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000);
 
-  // シーン
+  //シーン
   scene = new THREE.Scene();
 
-  // カメラ
+  //カメラ
   camera = new THREE.PerspectiveCamera(45, width / height);
   camera.position.set(0, 0, 200);
 
@@ -238,7 +237,7 @@ function init() {
   function createStar(starTextuer){
     let star = new THREE.Geometry();
 
-    for (let i = 0; i < 50000; i++) {
+    for (let i = 0; i < 10000; i++) {
       star.vertices.push(new THREE.Vector3(
         3000 * (Math.random() - 0.5),
         3000 * (Math.random() - 0.5),
@@ -265,12 +264,14 @@ function animate(){
   requestAnimationFrame( animate );
 
   let controls = new THREE.OrbitControls(camera,renderer.domElement);
-  controls.target.set( 0, 0, 0 );
-  controls.minDistance = 100;
+  // controls.target.set( 0, 0, 0 );
+  // controls.autoRotate = true;
+  controls.minDistance = 50;
   controls.maxDistance = 1000;
   controls.enableDamping = true;
   controls.dampingFactor = .001;
-  
+  controls.zoomSpeed = .005;
+  controls.update();
 
   render();
 }
@@ -408,6 +409,6 @@ function render(){
   const plutolY = Math.sin(plutoT / 3.0);
   pluto.position.set(plutolX, plutolY, plutolZ);
 
-  // controls.update();
+  
   renderer.render(scene, camera);
 }
