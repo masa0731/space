@@ -6,6 +6,7 @@ let scene;
 let mercury;
 let venus;
 let earth;
+let moon;
 let mars;
 let jupiter;
 let saturn;
@@ -115,6 +116,24 @@ function init() {
     );
     earth.position.set(28, 0, 0);
     scene.add(earth);
+  }
+
+  // ------------------------------Moon
+  loader = new THREE.TextureLoader();
+  loader.load('images/moon.jpg', function(moonTextuer) {
+    createMoon(moonTextuer);
+    render();
+  });
+
+  function createMoon(moonTextuer){
+    moon = new THREE.Mesh(
+      new THREE.SphereGeometry(.3, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: moonTextuer
+      })
+    );
+    moon.position.set(29, 0, 0);
+    scene.add(moon);
   }
 
   // ------------------------------Mars
@@ -227,35 +246,22 @@ function init() {
   
   // ------------------------------Star
 
-  loader = new THREE.TextureLoader();
-  loader.load('images/star.png', function(starTextuer) {
-    createStar(starTextuer);
-    render();
-  });
-  
-
-  function createStar(starTextuer){
-    let star = new THREE.Geometry();
-
-    for (let i = 0; i < 10000; i++) {
-      star.vertices.push(new THREE.Vector3(
-        3000 * (Math.random() - 0.5),
-        3000 * (Math.random() - 0.5),
-        3000 * (Math.random() - 0.5),
-      ));
+  const starTexture = this.loader.load('images/star.png');
+    const starsGeometry = new THREE.Geometry();
+    for (var i = 0; i < 50000; i++) {
+      var star = new THREE.Vector3();
+      star.x = THREE.Math.randFloatSpread(2000);
+      star.y = THREE.Math.randFloatSpread(2000);
+      star.z = THREE.Math.randFloatSpread(2000);
+      starsGeometry.vertices.push(star);
     }
-
-    // マテリアル
-    const material = new THREE.PointsMaterial({
-      size: 2,
-      map: starTextuer,
+    const starsMaterial = new THREE.PointsMaterial({
+      map: starTexture,
+      size: 5,
+      transparent: true,
     });
-    
-    const mesh = new THREE.Points(star, material);
-    scene.add(mesh);
-  }
-
-  // ------------------------------
+    starField = new THREE.Points(starsGeometry, starsMaterial);
+    scene.add(this.starField);
 
   // ------------------------------
 }
@@ -309,6 +315,7 @@ function render(){
   mercury.rotation.y += THREE.Math.degToRad(.06);
   venus.rotation.y -= THREE.Math.degToRad(0.001);
   earth.rotation.y += THREE.Math.degToRad(.58);
+  moon.rotation.y += THREE.Math.degToRad(.65);
   mars.rotation.y += THREE.Math.degToRad(.12);
   jupiter.rotation.y += THREE.Math.degToRad(.23);
   saturn.rotation.y -= THREE.Math.degToRad(.23);
@@ -348,6 +355,16 @@ function render(){
   const earthlZ = earthR * Math.sin(earthT);
   const earthlY = Math.sin(earthT / 3.0);
   earth.position.set(earthlX, earthlY, earthlZ);
+
+  // ------------------------------Moon
+
+  // const moonT = Date.now() / 9855;
+  const moonT = Date.now() / 591300;
+  const moonR = 30;
+  const moonlX = moonR * Math.cos(moonT);
+  const moonlZ = moonR * Math.sin(moonT);
+  const moonlY = Math.sin(moonT / 3.0);
+  moon.position.set(moonlX, moonlY, moonlZ);
 
   // ------------------------------Mars
 
