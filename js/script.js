@@ -3,6 +3,7 @@ let height = window.innerHeight;
 let renderer;
 let scene;
 
+let sun;
 let mercury;
 let venus;
 let earth;
@@ -248,11 +249,11 @@ function init() {
 
   const starTexture = this.loader.load('images/star.png');
     const starsGeometry = new THREE.Geometry();
-    for (var i = 0; i < 50000; i++) {
+    for (var i = 0; i < 5000; i++) {
       var star = new THREE.Vector3();
-      star.x = THREE.Math.randFloatSpread(2000);
-      star.y = THREE.Math.randFloatSpread(2000);
-      star.z = THREE.Math.randFloatSpread(2000);
+      star.x = THREE.Math.randFloatSpread(1000);
+      star.y = THREE.Math.randFloatSpread(1000);
+      star.z = THREE.Math.randFloatSpread(1000);
       starsGeometry.vertices.push(star);
     }
     const starsMaterial = new THREE.PointsMaterial({
@@ -267,17 +268,8 @@ function init() {
 }
 
 function animate(){
+  
   requestAnimationFrame( animate );
-
-  let controls = new THREE.OrbitControls(camera,renderer.domElement);
-  // controls.target.set( 0, 0, 0 );
-  // controls.autoRotate = true;
-  controls.minDistance = 50;
-  controls.maxDistance = 1000;
-  controls.enableDamping = true;
-  controls.dampingFactor = .001;
-  controls.zoomSpeed = .005;
-  controls.update();
 
   render();
 }
@@ -286,7 +278,7 @@ function render(){
 
   // ------------------------------自転
 
-  // sanple
+  // sample
   // sun.rotation.y += THREE.Math.degToRad(0.2);
   // mercury.rotation.y += THREE.Math.degToRad(0.5);
   // venus.rotation.y -= THREE.Math.degToRad(0.01);
@@ -322,7 +314,6 @@ function render(){
   uranus.rotation.x += THREE.Math.degToRad(.18);
   neptune.rotation.y += THREE.Math.degToRad(.18);
   pluto.rotation.y += THREE.Math.degToRad(0);
-
 
   // ------------------------------公転
 
@@ -426,6 +417,17 @@ function render(){
   const plutolY = Math.sin(plutoT / 3.0);
   pluto.position.set(plutolX, plutolY, plutolZ);
 
-  
   renderer.render(scene, camera);
+
+  // ------------------------------OrbitControls
+
+  let controls = new THREE.OrbitControls(camera,renderer.domElement);
+  // controls.target.set( 0, 0, 0 );
+  // controls.autoRotate = true;
+  controls.minDistance = 50;
+  controls.maxDistance = 1000;
+  controls.enableDamping = true;
+  controls.dampingFactor = .001;
+  controls.zoomSpeed = .005;
+  controls.update();
 }
