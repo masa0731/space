@@ -15,6 +15,20 @@ let uranus;
 let neptune;
 let pluto;
 
+let sunPosition;
+let mercuryPosition;
+let venusPosition;
+let earthPosition;
+let moonPosition;
+let marsPosition;
+let jupiterPosition;
+let saturnPosition;
+let uranusPosition;
+let neptunePosition;
+let plutoPosition;
+
+let oneDay;
+
 let camera;
 let ambientLight;
 
@@ -278,48 +292,24 @@ function render(){
 
   // ------------------------------自転
 
-  // sample
-  // sun.rotation.y += THREE.Math.degToRad(0.2);
-  // mercury.rotation.y += THREE.Math.degToRad(0.5);
-  // venus.rotation.y -= THREE.Math.degToRad(0.01);
-  // earth.rotation.y += THREE.Math.degToRad(5);
-  // mars.rotation.y += THREE.Math.degToRad(1);
-  // jupiter.rotation.y += THREE.Math.degToRad(2);
-  // saturn.rotation.y -= THREE.Math.degToRad(2);
-  // uranus.rotation.x += THREE.Math.degToRad(1.5);
-  // neptune.rotation.y += THREE.Math.degToRad(1.5);
-  // pluto.rotation.y += THREE.Math.degToRad(0);
-
-  // 1y = 1m
-  // sun.rotation.y += THREE.Math.degToRad(1.4);
-  // mercury.rotation.y += THREE.Math.degToRad(3.5);
-  // venus.rotation.y -= THREE.Math.degToRad(0.07);
-  // earth.rotation.y += THREE.Math.degToRad(35);
-  // mars.rotation.y += THREE.Math.degToRad(7);
-  // jupiter.rotation.y += THREE.Math.degToRad(14);
-  // saturn.rotation.y -= THREE.Math.degToRad(14);
-  // uranus.rotation.x += THREE.Math.degToRad(10.5);
-  // neptune.rotation.y += THREE.Math.degToRad(10.5);
-  // pluto.rotation.y += THREE.Math.degToRad(0);
-
-  // 1y = 1h
-  sun.rotation.y += THREE.Math.degToRad(.23);
-  mercury.rotation.y += THREE.Math.degToRad(.06);
-  venus.rotation.y -= THREE.Math.degToRad(0.001);
-  earth.rotation.y += THREE.Math.degToRad(.58);
-  moon.rotation.y += THREE.Math.degToRad(.65);
-  mars.rotation.y += THREE.Math.degToRad(.12);
-  jupiter.rotation.y += THREE.Math.degToRad(.23);
-  saturn.rotation.y -= THREE.Math.degToRad(.23);
-  uranus.rotation.x += THREE.Math.degToRad(.18);
-  neptune.rotation.y += THREE.Math.degToRad(.18);
-  pluto.rotation.y += THREE.Math.degToRad(0);
+  oneDay = 1;
+  // 1d = 1s
+  sun.rotation.y += THREE.Math.degToRad(.24 / oneDay);
+  mercury.rotation.y += THREE.Math.degToRad(.103 / oneDay);
+  venus.rotation.y -= THREE.Math.degToRad(0.024 / oneDay);
+  earth.rotation.y += THREE.Math.degToRad(6 / oneDay);
+  moon.rotation.y += THREE.Math.degToRad(.22 / oneDay);
+  mars.rotation.y += THREE.Math.degToRad(6 / oneDay);
+  jupiter.rotation.y += THREE.Math.degToRad(14.63 / oneDay);
+  saturn.rotation.y -= THREE.Math.degToRad(14.63 / oneDay);
+  uranus.rotation.x += THREE.Math.degToRad(8.57 / oneDay);
+  neptune.rotation.y += THREE.Math.degToRad(9 / oneDay);
+  pluto.rotation.y += THREE.Math.degToRad(0 / oneDay);
 
   // ------------------------------公転
 
   // ------------------------------Mercury
 
-  // const mercuryT = Date.now() / 2376;
   const mercuryT = Date.now() / 142560;
   const mercuryR = 19;
   const mercurylX = mercuryR * Math.cos(mercuryT);
@@ -329,7 +319,6 @@ function render(){
 
   // ------------------------------Venus
 
-  // const venusT = Date.now() / 6075;
   const venusT = Date.now() / 364500;
   const venusR = 24;
   const venuslX = venusR * Math.cos(venusT);
@@ -339,7 +328,6 @@ function render(){
 
   // ------------------------------Earth
 
-  // const earthT = Date.now() / 9855;
   const earthT = Date.now() / 591300;
   const earthR = 28;
   const earthlX = earthR * Math.cos(earthT);
@@ -349,7 +337,6 @@ function render(){
 
   // ------------------------------Moon
 
-  // const moonT = Date.now() / 9855;
   const moonT = Date.now() / 591300;
   const moonR = 30;
   const moonlX = moonR * Math.cos(moonT);
@@ -359,7 +346,6 @@ function render(){
 
   // ------------------------------Mars
 
-  // const marsT = Date.now() / 18549;
   const marsT = Date.now() / 1112940;
   const marsR = 36;
   const marslX = marsR * Math.cos(marsT);
@@ -369,7 +355,6 @@ function render(){
 
   // ------------------------------Jupiter
 
-  // const jupiterT = Date.now() / 116910;
   const jupiterT = Date.now() / 7014600;
   const jupiterR = 91;
   const jupiterlX = jupiterR * Math.cos(jupiterT);
@@ -379,7 +364,6 @@ function render(){
 
    // ------------------------------Saturn
 
-  //  const saturnT = Date.now() / 290304;
    const saturnT = Date.now() / 17418240;
    const saturnR = 156;
    const saturnlX = saturnR * Math.cos(saturnT);
@@ -389,7 +373,6 @@ function render(){
 
   // ------------------------------Uranus
 
-  // const uranusT = Date.now() / 828009;
   const uranusT = Date.now() / 49680540;
   const uranusR = 301;
   const uranuslX = uranusR * Math.cos(uranusT);
@@ -399,7 +382,6 @@ function render(){
 
   // ------------------------------Neptune
 
-  // const neptuneT = Date.now() / 1623807;
   const neptuneT = Date.now() / 97428420;
   const neptuneR = 463;
   const neptunelX = neptuneR * Math.cos(neptuneT);
@@ -409,7 +391,6 @@ function render(){
 
   // ------------------------------Pluto
 
-  // const plutoT = Date.now() / 2444040;
   const plutoT = Date.now() / 146642400;
   const plutoR = 603;
   const plutolX = plutoR * Math.cos(plutoT);
@@ -418,6 +399,7 @@ function render(){
   pluto.position.set(plutolX, plutolY, plutolZ);
 
   renderer.render(scene, camera);
+
 
   // ------------------------------OrbitControls
 
