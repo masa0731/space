@@ -310,7 +310,7 @@ function render(){
 
   // ------------------------------Mercury
 
-  const mercuryT = Date.now() / 142560;
+  const mercuryT = Date.now() / 14000;
   const mercuryR = 19;
   const mercurylX = mercuryR * Math.cos(mercuryT);
   const mercurylZ = mercuryR * Math.sin(mercuryT);
@@ -319,7 +319,7 @@ function render(){
 
   // ------------------------------Venus
 
-  const venusT = Date.now() / 364500;
+  const venusT = Date.now() / 36000;
   const venusR = 24;
   const venuslX = venusR * Math.cos(venusT);
   const venuslZ = venusR * Math.sin(venusT);
@@ -328,7 +328,7 @@ function render(){
 
   // ------------------------------Earth
 
-  const earthT = Date.now() / 591300;
+  const earthT = Date.now() / 59000;
   const earthR = 28;
   const earthlX = earthR * Math.cos(earthT);
   const earthlZ = earthR * Math.sin(earthT);
@@ -337,7 +337,7 @@ function render(){
 
   // ------------------------------Moon
 
-  const moonT = Date.now() / 591300;
+  const moonT = Date.now() / 59000;
   const moonR = 30;
   const moonlX = moonR * Math.cos(moonT);
   const moonlZ = moonR * Math.sin(moonT);
@@ -346,7 +346,7 @@ function render(){
 
   // ------------------------------Mars
 
-  const marsT = Date.now() / 1112940;
+  const marsT = Date.now() / 111000;
   const marsR = 36;
   const marslX = marsR * Math.cos(marsT);
   const marslZ = marsR * Math.sin(marsT);
@@ -355,7 +355,7 @@ function render(){
 
   // ------------------------------Jupiter
 
-  const jupiterT = Date.now() / 7014600;
+  const jupiterT = Date.now() / 701000;
   const jupiterR = 91;
   const jupiterlX = jupiterR * Math.cos(jupiterT);
   const jupiterlZ = jupiterR * Math.sin(jupiterT);
@@ -364,7 +364,7 @@ function render(){
 
    // ------------------------------Saturn
 
-   const saturnT = Date.now() / 17418240;
+   const saturnT = Date.now() / 1741000;
    const saturnR = 156;
    const saturnlX = saturnR * Math.cos(saturnT);
    const saturnlZ = saturnR * Math.sin(saturnT);
@@ -373,7 +373,7 @@ function render(){
 
   // ------------------------------Uranus
 
-  const uranusT = Date.now() / 49680540;
+  const uranusT = Date.now() / 4968000;
   const uranusR = 301;
   const uranuslX = uranusR * Math.cos(uranusT);
   const uranuslZ = uranusR * Math.sin(uranusT);
@@ -382,7 +382,7 @@ function render(){
 
   // ------------------------------Neptune
 
-  const neptuneT = Date.now() / 97428420;
+  const neptuneT = Date.now() / 9742000;
   const neptuneR = 463;
   const neptunelX = neptuneR * Math.cos(neptuneT);
   const neptunelZ = neptuneR * Math.sin(neptuneT);
@@ -391,7 +391,7 @@ function render(){
 
   // ------------------------------Pluto
 
-  const plutoT = Date.now() / 146642400;
+  const plutoT = Date.now() / 14664000;
   const plutoR = 603;
   const plutolX = plutoR * Math.cos(plutoT);
   const plutolZ = plutoR * Math.sin(plutoT);
@@ -408,8 +408,8 @@ function render(){
   // controls.autoRotate = true;
   controls.minDistance = 50;
   controls.maxDistance = 1000;
-  controls.enableDamping = true;
-  controls.dampingFactor = .001;
-  controls.zoomSpeed = .005;
+  // controls.enableDamping = true;
+  controls.dampingFactor = 0.001;
+  controls.zoomSpeed = 0.005;
   controls.update();
 }
