@@ -15,6 +15,8 @@ let uranus;
 let neptune;
 let pluto;
 
+let sunDistance = 139;
+
 let sunPosition;
 let mercuryPosition;
 let venusPosition;
@@ -29,6 +31,7 @@ let plutoPosition;
 
 let oneDay;
 
+let controls;
 let camera;
 let ambientLight;
 
@@ -38,7 +41,7 @@ animate();
 
 function init() {
 
-  //レンダラー
+  // ------------------------------レンダラー
   renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector('#myCanvas')
   });
@@ -46,20 +49,24 @@ function init() {
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000);
 
-  //シーン
+  // ------------------------------シーン
   scene = new THREE.Scene();
 
-  //カメラ
-  camera = new THREE.PerspectiveCamera(45, width / height);
-  camera.position.set(0, 0, 200);
+  // ------------------------------カメラ
+  camera = new THREE.PerspectiveCamera( 75, window.innerWidth /window.innerHeight, 1, 2000 );
+  camera.position.set(0, 0, 500);
 
-  //環境光源
+  // ------------------------------OrbitControls
+  controls = new THREE.OrbitControls(camera,renderer.domElement);
+  controls.minDistance = 150;
+  controls.maxDistance = 900;
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.2;
+  controls.zoomSpeed = 0.3;
+
+  // ------------------------------環境光源
   ambientLight = new THREE.AmbientLight(0xcccccc);
   scene.add(ambientLight);
-  // const testlight = new THREE.AmbientLight(0xFFFFFF, 1.0);
-  // scene.add(testlight);
-
-  
 
   // ------------------------------Sun
   loader = new THREE.TextureLoader();
@@ -70,7 +77,7 @@ function init() {
 
   function createSun(sunTextuer){
     sun = new THREE.Mesh(
-      new THREE.SphereGeometry(13, 32, 32),
+      new THREE.SphereGeometry(sunDistance, 32, 32),
       new THREE.MeshPhongMaterial({
         map: sunTextuer
       })
@@ -93,7 +100,7 @@ function init() {
         map: mercuryTextuer
       })
     );
-    mercury.position.set(19, 0, 0);
+    mercury.position.set(sunDistance + 6, 0, 0);
     scene.add(mercury);
   }
 
@@ -111,7 +118,7 @@ function init() {
         map: venusTextuer
       })
     );
-    venus.position.set(24, 0, 0);
+    venus.position.set(sunDistance + 11, 0, 0);
     scene.add(venus);
   }
 
@@ -129,7 +136,7 @@ function init() {
         map: earthTextuer
       })
     );
-    earth.position.set(28, 0, 0);
+    earth.position.set(sunDistance + 15, 0, 0);
     scene.add(earth);
   }
 
@@ -147,7 +154,7 @@ function init() {
         map: moonTextuer
       })
     );
-    moon.position.set(29, 0, 0);
+    moon.position.set(sunDistance + 17, 0, 0);
     scene.add(moon);
   }
 
@@ -165,7 +172,7 @@ function init() {
         map: marsTextuer
       })
     );
-    mars.position.set(36, 0, 0);
+    mars.position.set(sunDistance + 23, 0, 0);
     scene.add(mars);
   }
   
@@ -183,7 +190,7 @@ function init() {
         map: jupiterTextuer
       })
     );
-    jupiter.position.set(91, 0, 0);
+    jupiter.position.set(sunDistance + 78, 0, 0);
     scene.add(jupiter);
   }
   
@@ -201,7 +208,7 @@ function init() {
         map: saturnTextuer
       })
     );
-    saturn.position.set(156, 0, 0);
+    saturn.position.set(sunDistance + 143, 0, 0);
     scene.add(saturn);
   }
   
@@ -219,7 +226,7 @@ function init() {
         map: uranusTextuer
       })
     );
-    uranus.position.set(301, 0, 0);
+    uranus.position.set(sunDistance + 288, 0, 0);
     scene.add(uranus);
   }
   
@@ -237,7 +244,7 @@ function init() {
         map: neptuneTextuer
       })
     );
-    neptune.position.set(463, 0, 0);
+    neptune.position.set(sunDistance + 450, 0, 0);
     scene.add(neptune);
   }
   
@@ -255,7 +262,7 @@ function init() {
         map: plutoTextuer
       })
     );
-    pluto.position.set(603, 0, 0);
+    pluto.position.set(sunDistance + 590, 0, 0);
     scene.add(pluto);
   }
   
@@ -311,7 +318,7 @@ function render(){
   // ------------------------------Mercury
 
   const mercuryT = Date.now() / 14000;
-  const mercuryR = 19;
+  const mercuryR = sunDistance + 6;
   const mercurylX = mercuryR * Math.cos(mercuryT);
   const mercurylZ = mercuryR * Math.sin(mercuryT);
   const mercurylY = Math.sin(mercuryT / 3.0);
@@ -320,7 +327,7 @@ function render(){
   // ------------------------------Venus
 
   const venusT = Date.now() / 36000;
-  const venusR = 24;
+  const venusR = sunDistance + 11;
   const venuslX = venusR * Math.cos(venusT);
   const venuslZ = venusR * Math.sin(venusT);
   const venuslY = Math.sin(venusT / 3.0);
@@ -329,7 +336,7 @@ function render(){
   // ------------------------------Earth
 
   const earthT = Date.now() / 59000;
-  const earthR = 28;
+  const earthR = sunDistance + 15;
   const earthlX = earthR * Math.cos(earthT);
   const earthlZ = earthR * Math.sin(earthT);
   const earthlY = Math.sin(earthT / 3.0);
@@ -338,7 +345,7 @@ function render(){
   // ------------------------------Moon
 
   const moonT = Date.now() / 59000;
-  const moonR = 30;
+  const moonR = sunDistance + 17;
   const moonlX = moonR * Math.cos(moonT);
   const moonlZ = moonR * Math.sin(moonT);
   const moonlY = Math.sin(moonT / 3.0);
@@ -347,7 +354,7 @@ function render(){
   // ------------------------------Mars
 
   const marsT = Date.now() / 111000;
-  const marsR = 36;
+  const marsR = sunDistance + 23;
   const marslX = marsR * Math.cos(marsT);
   const marslZ = marsR * Math.sin(marsT);
   const marslY = Math.sin(marsT / 3.0);
@@ -356,7 +363,7 @@ function render(){
   // ------------------------------Jupiter
 
   const jupiterT = Date.now() / 701000;
-  const jupiterR = 91;
+  const jupiterR = sunDistance + 78;
   const jupiterlX = jupiterR * Math.cos(jupiterT);
   const jupiterlZ = jupiterR * Math.sin(jupiterT);
   const jupiterlY = Math.sin(jupiterT / 3.0);
@@ -365,7 +372,7 @@ function render(){
    // ------------------------------Saturn
 
    const saturnT = Date.now() / 1741000;
-   const saturnR = 156;
+   const saturnR = sunDistance + 143;
    const saturnlX = saturnR * Math.cos(saturnT);
    const saturnlZ = saturnR * Math.sin(saturnT);
    const saturnlY = Math.sin(saturnT / 3.0);
@@ -374,7 +381,7 @@ function render(){
   // ------------------------------Uranus
 
   const uranusT = Date.now() / 4968000;
-  const uranusR = 301;
+  const uranusR = sunDistance + 288;
   const uranuslX = uranusR * Math.cos(uranusT);
   const uranuslZ = uranusR * Math.sin(uranusT);
   const uranuslY = Math.sin(uranusT / 3.0);
@@ -383,7 +390,7 @@ function render(){
   // ------------------------------Neptune
 
   const neptuneT = Date.now() / 9742000;
-  const neptuneR = 463;
+  const neptuneR = sunDistance + 450;
   const neptunelX = neptuneR * Math.cos(neptuneT);
   const neptunelZ = neptuneR * Math.sin(neptuneT);
   const neptunelY = Math.sin(neptuneT / 3.0);
@@ -392,7 +399,7 @@ function render(){
   // ------------------------------Pluto
 
   const plutoT = Date.now() / 14664000;
-  const plutoR = 603;
+  const plutoR = 590;
   const plutolX = plutoR * Math.cos(plutoT);
   const plutolZ = plutoR * Math.sin(plutoT);
   const plutolY = Math.sin(plutoT / 3.0);
@@ -400,16 +407,5 @@ function render(){
 
   renderer.render(scene, camera);
 
-
-  // ------------------------------OrbitControls
-
-  let controls = new THREE.OrbitControls(camera,renderer.domElement);
-  // controls.target.set( 0, 0, 0 );
-  // controls.autoRotate = true;
-  controls.minDistance = 50;
-  controls.maxDistance = 1000;
-  // controls.enableDamping = true;
-  controls.dampingFactor = 0.001;
-  controls.zoomSpeed = 0.005;
   controls.update();
 }
