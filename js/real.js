@@ -1,39 +1,39 @@
-let width = window.innerWidth;
-let height = window.innerHeight;
-let renderer;
-let scene;
+// let width = window.innerWidth;
+// let height = window.innerHeight;
+// let renderer;
+// let scene;
 
-let sun;
-let mercury;
-let venus;
-let earth;
-let moon;
-let mars;
-let jupiter;
-let saturn;
-let uranus;
-let neptune;
-let pluto;
+// let sun;
+// let mercury;
+// let venus;
+// let earth;
+// let moon;
+// let mars;
+// let jupiter;
+// let saturn;
+// let uranus;
+// let neptune;
+// let pluto;
 
-let sunDistance = 139;
+// let sunDistance = 139;
 
-let sunPosition;
-let mercuryPosition;
-let venusPosition;
-let earthPosition;
-let moonPosition;
-let marsPosition;
-let jupiterPosition;
-let saturnPosition;
-let uranusPosition;
-let neptunePosition;
-let plutoPosition;
+// let sunPosition;
+// let mercuryPosition;
+// let venusPosition;
+// let earthPosition;
+// let moonPosition;
+// let marsPosition;
+// let jupiterPosition;
+// let saturnPosition;
+// let uranusPosition;
+// let neptunePosition;
+// let plutoPosition;
 
-let oneDay;
+// let oneDay;
 
-let controls;
-let camera;
-let ambientLight;
+// let controls;
+// let camera;
+// let ambientLight;
 
 
 init();
@@ -43,7 +43,7 @@ function init() {
 
   // ------------------------------レンダラー
   renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector('#myCanvas')
+    canvas: document.querySelector('#canvas')
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(width, height);
@@ -279,13 +279,14 @@ function init() {
     }
     const starsMaterial = new THREE.PointsMaterial({
       map: starTexture,
-      size: 5,
+      size: 2,
       transparent: true,
     });
     starField = new THREE.Points(starsGeometry, starsMaterial);
     scene.add(this.starField);
 
   // ------------------------------
+
 }
 
 function animate(){
