@@ -53,15 +53,7 @@ function init() {
 
   // ------------------------------カメラ
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth /window.innerHeight, 1, 2000 );
-  camera.position.set(0, 0, 550);
-
-  // ------------------------------OrbitControls
-  controls = new THREE.OrbitControls(camera,renderer.domElement);
-  controls.minDistance = 150;
-  controls.maxDistance = 900;
-  controls.enableDamping = true;
-  controls.dampingFactor = 0.2;
-  controls.zoomSpeed = 0.3;
+  camera.position.set(0, 50, 550);
 
   // ------------------------------環境光源
   ambientLight = new THREE.AmbientLight(0xffffff);

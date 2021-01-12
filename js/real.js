@@ -407,5 +407,8 @@ function render(){
 
   renderer.render(scene, camera);
 
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = -.5;
+
   controls.update();
 }
