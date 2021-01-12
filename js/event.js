@@ -44,6 +44,9 @@ window.addEventListener('keyup', function (event) {
     $(".card_active").removeClass("card_active");
     $(".pluto").addClass("card_active");
       break;
+      case 187: // 12
+    $(".card_active").removeClass("card_active");
+      break;
     default:
   }
 });
