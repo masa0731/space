@@ -1,40 +1,39 @@
-// let width = window.innerWidth;
-// let height = window.innerHeight;
-// let renderer;
-// let scene;
+let width = window.innerWidth;
+let height = window.innerHeight;
+let renderer;
+let scene;
 
-// let sun;
-// let mercury;
-// let venus;
-// let earth;
-// let moon;
-// let mars;
-// let jupiter;
-// let saturn;
-// let uranus;
-// let neptune;
-// let pluto;
+let sun;
+let mercury;
+let venus;
+let earth;
+let moon;
+let mars;
+let jupiter;
+let saturn;
+let uranus;
+let neptune;
+let pluto;
 
-// let sunDistance = 80;
+let sunDistance = 80;
 
-// let sunPosition;
-// let mercuryPosition;
-// let venusPosition;
-// let earthPosition;
-// let moonPosition;
-// let marsPosition;
-// let jupiterPosition;
-// let saturnPosition;
-// let uranusPosition;
-// let neptunePosition;
-// let plutoPosition;
+let sunPosition;
+let mercuryPosition;
+let venusPosition;
+let earthPosition;
+let moonPosition;
+let marsPosition;
+let jupiterPosition;
+let saturnPosition;
+let uranusPosition;
+let neptunePosition;
+let plutoPosition;
 
-// let oneDay;
+let oneDay;
 
-// let controls;
-// let camera;
-// let ambientLight;
-
+let controls;
+let camera;
+let ambientLight;
 
 init();
 animate();
@@ -352,6 +351,52 @@ function render(){
 //   }else {
 //     // それ以外は元の色にする
 //     mesh.material.color.setHex(0xffffff);
+//   }
+
+//   // レンダリング
+//   renderer.render(scene, camera);
+//   requestAnimationFrame(tick);
+// }
+
+
+
+// // canvas 要素の参照を取得する
+// const canvas = document.querySelector('#myCanvas');
+// // マウス座標管理用のベクトルを作成
+// const mouse = new THREE.Vector2();
+// // マウスイベントを登録
+// canvas.addEventListener('mousemove', handleMouseMove);
+
+// // マウスを動かしたときのイベント
+// function handleMouseMove(event) {
+//   const element = event.currentTarget;
+//   // canvas要素上のXY座標
+//   const x = event.clientX - element.offsetLeft;
+//   const y = event.clientY - element.offsetTop;
+//   // canvas要素の幅・高さ
+//   const w = element.offsetWidth;
+//   const h = element.offsetHeight;
+
+//   // -1〜+1の範囲で現在のマウス座標を登録する
+//   mouse.x = ( x / w ) * 2 - 1;
+//   mouse.y = -( y / h ) * 2 + 1;
+// }
+
+// // レイキャストを作成
+// const raycaster = new THREE.Raycaster();
+
+// tick();
+// // 毎フレーム時に実行されるループイベントです
+// function tick() {
+
+//   // レイキャスト = マウス位置からまっすぐに伸びる光線ベクトルを生成
+//   raycaster.setFromCamera(mouse, camera);
+
+//   // その光線とぶつかったオブジェクトを得る
+//   const intersects = raycaster.intersectObjects(scene.children);
+
+//   if(intersects.length > 0){
+//     // ぶつかったオブジェクトに対してなんかする
 //   }
 
 //   // レンダリング
