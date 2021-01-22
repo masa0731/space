@@ -47,6 +47,7 @@ img {
   display: flex;
   justify-content: flex-start;
   opacity: 0;
+  z-index: 1;
   transition: opacity .3s;
   position: fixed;
   top: 0;
@@ -63,13 +64,17 @@ img {
   margin-bottom: 10px;
   font-size: 24px;
   font-weight: 700;
+  letter-spacing: .1em;
 }
 .card_text {
   width: 800px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: .1em;
 }
 
 .card_active {
   opacity: 1;
+  z-index: 100;
 }

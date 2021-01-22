@@ -70,7 +70,9 @@ function init() {
     sun = new THREE.Mesh(
       new THREE.SphereGeometry(sunDistance, 32, 32),
       new THREE.MeshPhongMaterial({
-        map: sunTextuer
+        map: sunTextuer,
+        // opacity: 1,
+        // transparent: true,
       })
     );
     sun.position.set( -580, 0, 0);
