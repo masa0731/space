@@ -299,8 +299,8 @@ function render(){
 
   // ------------------------------自転
 
-  oneDay = 1;
   // 1d = 1s
+  oneDay = 1;
   sun.rotation.y += THREE.Math.degToRad(.24 / oneDay);
   mercury.rotation.y += THREE.Math.degToRad(.103 / oneDay);
   venus.rotation.y -= THREE.Math.degToRad(0.024 / oneDay);

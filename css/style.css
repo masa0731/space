@@ -60,6 +60,11 @@ img {
   margin-right: 50px;
   background: #000;
 }
+.card_block {
+  width: 800px;
+  height: 300px;
+  overflow: scroll;
+}
 .card_title {
   margin-bottom: 10px;
   font-size: 24px;
@@ -69,6 +74,13 @@ img {
 .card_text {
   width: 800px;
   margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: .1em;
+}
+.card_list {
+  width: 800px;
+  margin-bottom: 5px;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: .1em;
